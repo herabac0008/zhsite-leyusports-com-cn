@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>信息索引 · 爱游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', sans-serif;
+            background: #f6f7f9;
+            color: #262a30;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 深色头图 —— 收敛的暗调叙事背景 */
+        .hero {
+            background: #0c0f14;
+            background-image: radial-gradient(circle at 20% 30%, #1e2630 0%, #090b0f 100%);
+            color: #e7ebf0;
+            padding: 4rem 1.8rem 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #f2b34a 30%, #f2b34a 70%, transparent 100%);
+            opacity: 0.65;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 strong {
+            font-weight: 600;
+            color: #f2b34a;
+        }
+
+        .hero .tagline {
+            max-width: 600px;
+            margin: 0.8rem auto 0;
+            font-size: 1.05rem;
+            color: #afb9c7;
+            font-weight: 350;
+            letter-spacing: 0.02em;
+        }
+
+        .hero .sub-seed {
+            display: inline-block;
+            margin-top: 1.2rem;
+            font-size: 0.78rem;
+            color: #5a6575;
+            border: 1px solid #2c3541;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            opacity: 0.5;
+        }
+
+        /* 浅色正文区 — 卡片 & 内容 */
+        .main-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2.8rem 1.5rem 4rem;
+        }
+
+        /* 承接段落 — 从信息整理角度切入 */
+        .intro-block {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.2rem 2.2rem 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            margin-bottom: 2.4rem;
+        }
+
+        .intro-block p {
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .intro-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-block .inset-link {
+            font-weight: 500;
+        }
+
+        .intro-block a {
+            color: #c9522c;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 82, 44, 0.3);
+            transition: border-color 0.25s, color 0.2s;
+        }
+
+        .intro-block a:hover {
+            color: #943e1f;
+            border-bottom-color: #943e1f;
+        }
+
+        /* 特点列表 —— 四象限卡片，高信息密度 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.4rem;
+            margin: 2.2rem 0 2.8rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem 1.4rem 1.6rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef0f2;
+            transition: box-shadow 0.15s, transform 0.15s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+            border-color: #e1e4e8;
+        }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.6rem;
+            color: #1f2329;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .feature-card h3 .num {
+            display: inline-block;
+            font-weight: 400;
+            color: #c9522c;
+            font-size: 0.85rem;
+            margin-right: 0.3rem;
+            background: #f3e9e3;
+            padding: 0 0.5rem;
+            border-radius: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-card p {
+            font-size: 0.93rem;
+            color: #3d434c;
+            line-height: 1.6;
+        }
+
+        /* 场景小段落 —— 紧凑提示 */
+        .scene-note {
+            background: #f2f3f6;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            margin: 2.2rem 0 1.8rem;
+            border-left: 4px solid #c9522c;
+        }
+
+        .scene-note p {
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .scene-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .scene-note strong {
+            font-weight: 600;
+            color: #1f2329;
+        }
+
+        /* FAQ摘要 — 克制、真实 */
+        .faq-mini {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 2rem 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            margin: 2rem 0 1rem;
+        }
+
+        .faq-mini h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1f2329;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .faq-item {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #edf0f3;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item .q {
+            font-weight: 550;
+            color: #1f2329;
+            font-size: 0.95rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .faq-item .a {
+            font-size: 0.9rem;
+            color: #4d5560;
+        }
+
+        .faq-item a {
+            color: #c9522c;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(201, 82, 44, 0.4);
+        }
+
+        .faq-item a:hover {
+            border-bottom-color: #c9522c;
+        }
+
+        /* 温和结尾 / 署名 */
+        .closing {
+            margin-top: 2.8rem;
+            text-align: center;
+            border-top: 1px solid #e2e6ea;
+            padding-top: 2rem;
+            color: #5b6575;
+            font-size: 0.9rem;
+        }
+
+        .closing a {
+            color: #c9522c;
+            font-weight: 450;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 82, 44, 0.2);
+        }
+
+        .closing a:hover {
+            border-bottom-color: #c9522c;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                padding: 3.2rem 1.2rem 4rem;
+            }
+
+            .main-container {
+                padding: 2rem 1rem 3rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .intro-block, .faq-mini, .scene-note {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .faq-mini {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .feature-grid {
+                gap: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>信息索引 · <strong>爱游戏</strong></h1>
+    <p class="tagline">整理游艺资料与线索，汇聚可检索的条目库</p>
+    <span class="sub-seed">索引种子 · 内容锚点</span>
+</section>
+
+<div class="main-container">
+
+    <!-- 承接段落 —— 资料整理与索引视角 -->
+    <div class="intro-block">
+        <p>
+            游戏品类日益庞杂，从单机到移动端，从独立作品到长线运营服务，玩家与研究者都需要一个可回溯的整理节点。
+            本页围绕 <a href="https://m-index-igame.com" class="inset-link">爱游戏</a> 所呈现的内容线索，尝试以信息索引的视角进行结构化梳理。
+            不追求面面俱到，而是将散落在各处的游戏名称、版本演变、界面风格以及社区讨论中反复出现的术语进行归类。
+        </p>
+        <p>
+            在长期资料收集中，以「爱游戏」作为锚点可关联大量非结构化文本与元数据；下文列出四个索引方向，供进一步查阅或交叉比对。
+        </p>
+    </div>
+
+    <!-- 特点列表：四象限卡片 -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3><span class="num">01</span> 名称·版本</h3>
+            <p>收录标题变体、发行代号、更新版本号及常用缩写，减少因命名差异导致的信息遗漏。覆盖中文、英文及部分社区惯用译名。</p>
+        </div>
+        <div class="feature-card">
+            <h3><span class="num">02</span> 机制·标签</h3>
+            <p>提炼关键词：回合制、建造、卡牌构筑、开放世界、Roguelike、模拟经营等，便于横向比较不同作品的交互逻辑。</p>
+        </div>
+        <div class="feature-card">
+            <h3><span class="num">03</span> 界面·视觉</h3>
+            <p>记录UI风格、icon演变、官网截图及交互模式，可作为游戏设计或界面研究的素材参照。</p>
+        </div>
+        <div class="feature-card">
+            <h3><span class="num">04</span> 讨论·参考</h3>
+            <p>整理来自社区、评测及开发者访谈中的常见话题与参考链接，包括游戏机制解析、版本差异讨论等。</p>
+        </div>
+    </div>
+
+    <!-- 场景提示——索引使用场景 -->
+    <div class="scene-note">
+        <p><strong>✦ 索引场景示例：</strong> 当需要回溯某款游戏的原始名称或早期版本描述时，可通过「爱游戏」的整理页面查找对应条目；若想了解游戏机制的标签归类，也可在索引中找到相近作品作为参照。</p>
+        <p>以上内容均基于公开可查的信息，不包含非公开数据或主观推测。</p>
+    </div>
+
+    <!-- FAQ 摘要（克制、真实） -->
+    <div class="faq-mini">
+        <h4>常见索引问题 · 摘要</h4>
+        <div class="faq-item">
+            <div class="q">信息源主要来自哪里？</div>
+            <div class="a">主要来自游戏官方页面、版本发布日志、社区维基及已公开的访谈资料，未使用非授权数据库。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">索引条目会更新吗？</div>
+            <div class="a">依据版本变动与资料补充进行修订，不设固定周期。当前条目与 <a href="https://m-index-igame.com">爱游戏</a> 的内容节点保持同步。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">是否可以引用或转载？</div>
+            <div class="a">基于事实的条目信息欢迎合理引用，建议同时注明原文出处以便核对。</div>
+        </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="closing">
+        <p>一份基于资料整理的游戏信息索引 · 由 <a href="https://m-index-igame.com">爱游戏</a> 衍生</p>
+        <p style="margin-top: 0.4rem; font-size: 0.8rem; color: #8a94a2;">内容结构依种子变化，每次独立编排</p>
+    </div>
+
+</div>
+
+</body>
+</html>
